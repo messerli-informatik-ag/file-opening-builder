@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Update.Client.InstallationGateway
+namespace Messerli.FileOpeningBuilder
 {
     [Equals]
     public class FileOpeningBuilder : IFileOpeningBuilder

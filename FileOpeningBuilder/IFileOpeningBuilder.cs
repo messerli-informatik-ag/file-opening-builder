@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Update.Client.InstallationGateway
+namespace Messerli.FileOpeningBuilder
 {
     public interface IFileOpeningBuilder
     {
