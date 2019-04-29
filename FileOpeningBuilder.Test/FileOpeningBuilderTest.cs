@@ -5,7 +5,7 @@ using System.Linq;
 using Messerli.Test.Utility;
 using Xunit;
 
-namespace Update.Client.InstallationGateway.Test
+namespace Messerli.FileOpeningBuilder.Test
 {
 
     public class FileOpeningBuilderTest
