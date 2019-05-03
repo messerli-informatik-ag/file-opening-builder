@@ -28,7 +28,6 @@ install:
 
 script:
  - dotnet tool install --global Paket || true
- - paket install
  - dotnet restore
  - dotnet build
  - dotnet test
