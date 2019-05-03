@@ -1,0 +1,7 @@
+framework auto-detect
+
+source https://www.nuget.org/api/v2
+
+nuget Equals.Fody ~> 1.9
+nuget Messerli.Test.Utility ~> 0.1.0
+nuget Messerli.Utility ~> 0.1.1
