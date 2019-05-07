@@ -29,6 +29,7 @@ install:
 script:
  - dotnet tool install --global Paket
  - PATH=$PATH:~/.dotnet/tools/
+ - paket install
  - dotnet restore
  - dotnet build
  - dotnet test
