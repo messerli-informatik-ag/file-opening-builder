@@ -27,7 +27,7 @@ install:
  - sudo apt install dotnet-sdk-2.2
 
 script:
- - dotnet tool install --global Paket || true
+ - dotnet tool install --global Paket
  - PATH=$PATH:~/.dotnet/tools/
  - dotnet restore
  - dotnet build
