@@ -28,7 +28,7 @@ install:
 
 script:
  - dotnet tool install --global Paket || true
- - source ~/.bashrc
+ - paket install
  - dotnet restore
  - dotnet build
  - dotnet test
