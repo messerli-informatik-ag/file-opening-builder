@@ -243,7 +243,6 @@ _Pvt_Extensions
 # Paket dependency manager
 paket-files/
 paket.lock
-paket.bootstrapper.exe
 
 # FAKE - F# Make
 .fake/
