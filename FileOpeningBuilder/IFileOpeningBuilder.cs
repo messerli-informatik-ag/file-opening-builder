@@ -16,6 +16,6 @@ namespace Messerli.FileOpeningBuilder
 
         IFileOpeningBuilder CreateNew(bool createNew);
 
-        Stream Open(FileInfo path);
+        Stream Open(string path);
     }
 }
