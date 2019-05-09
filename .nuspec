@@ -3,7 +3,7 @@
     <metadata>
         <id>Messerli.FileOpeningBuilder</id>
         <version>0.1.0</version>
-        <authors>Jan Nils Ferner, Dominic Groth, Thomas Bruderer, Flavio Suter</authors>
+        <authors>Jan Nils Ferner, Dominic Groth, Ruben Schmidmeister, Flavio Suter</authors>
         <owners>messerli-informatik-ag</owners>
         <projectUrl>https://github.com/messerli-informatik-ag/file-opening-builder</projectUrl>
         <license type="expression">MIT or Apache-2.0</license>
