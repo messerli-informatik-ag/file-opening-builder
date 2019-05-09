@@ -49,11 +49,12 @@ namespace Messerli.FileOpeningBuilder
             return this;
         }
 
-        public Stream Open(FileInfo path)
+        public Stream Open(string path)
         {
             var settings = BuildSettings();
-            HandleNotNativelySupportedConfigurations(path);
-            return path.Open(settings.FileMode, settings.FileAccess, settings.FileShare);
+            var fileInfo = new FileInfo(path);
+            HandleNotNativelySupportedConfigurations(fileInfo);
+            return fileInfo.Open(settings.FileMode, settings.FileAccess, settings.FileShare);
         }
 
         private void HandleNotNativelySupportedConfigurations(FileInfo path)
