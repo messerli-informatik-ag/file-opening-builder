@@ -10,7 +10,7 @@ namespace Messerli.FileOpeningBuilder.Test
 
     public class FileOpeningBuilderTest
     {
-        private delegate FileInfo GetTestFile(string fileName);
+        private delegate string GetTestFile(string fileName);
 
         [Fact]
         public void ThrowsWhenNoOptionsHaveBeenSpecified()
@@ -20,8 +20,7 @@ namespace Messerli.FileOpeningBuilder.Test
                 var file = Path.Combine(testEnvironment.RootDirectory, NonExistentFile.Name);
                 Assert.Throws<InvalidOperationException>(() =>
                 {
-                    using (new FileOpeningBuilder()
-                        .Open(new FileInfo(file)))
+                    using (new FileOpeningBuilder().Open(file))
                     {
                     }
                 });
@@ -38,7 +37,7 @@ namespace Messerli.FileOpeningBuilder.Test
                 {
                     using (new FileOpeningBuilder()
                         .Read(true)
-                        .Open(new FileInfo(file)))
+                        .Open(file))
                     {
                     }
                 });
@@ -405,19 +404,18 @@ namespace Messerli.FileOpeningBuilder.Test
             }
         }
 
-        private static void AssertThatFileContains(FileInfo file, string expectedContent)
+        private static void AssertThatFileContains(string path, string expectedContent)
         {
-            var builder = new FileOpeningBuilder()
-                .Read(true);
-            AssertThatFileContains(builder, file, expectedContent);
+            var builder = new FileOpeningBuilder().Read(true);
+            AssertThatFileContains(builder, path, expectedContent);
         }
 
         private static void AssertThatFileContains(
             IFileOpeningBuilder builder,
-            FileInfo file,
+            string path,
             string expectedContent)
         {
-            using (var stream = builder.Open(file))
+            using (var stream = builder.Open(path))
             {
                 var content = ReadStream(stream);
                 Assert.Equal(expectedContent, content);
@@ -441,7 +439,10 @@ namespace Messerli.FileOpeningBuilder.Test
 
             foreach (var (file, attributes) in fileToAttributes)
             {
-                getTestFile(file).Attributes = attributes;
+                var fileInfo = new FileInfo(getTestFile(file))
+                {
+                    Attributes = attributes
+                };
             }
 
 
@@ -450,11 +451,7 @@ namespace Messerli.FileOpeningBuilder.Test
 
         private static GetTestFile CreateGetTestFilePath(string root)
         {
-            return fileName =>
-            {
-                var filePath = Path.Combine(root, DirectoryName, fileName);
-                return new FileInfo(filePath);
-            };
+            return fileName => Path.Combine(root, DirectoryName, fileName);
         }
 
         private static IEnumerable<TestFile> CreateTestFiles()
