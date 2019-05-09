@@ -8,7 +8,7 @@
         <projectUrl>https://github.com/messerli-informatik-ag/file-opening-builder</projectUrl>
         <license type="expression">MIT or Apache-2.0</license>
         <description>File opener library.</description>
-        <copyright>Copyright ©2019 Messerli Informatik Ag</copyright>
+        <copyright>Copyright ©2019 Messerli Informatik AG</copyright>
         <tags>fileopeningbuilder fileopening file</tags>
     </metadata>
 </package>
