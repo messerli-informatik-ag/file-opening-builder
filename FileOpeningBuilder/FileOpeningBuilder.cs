@@ -119,6 +119,19 @@ namespace Messerli.FileOpeningBuilder
             return new FileOpeningSettings(fileMode, fileAccess, fileShare);
         }
 
+        [CustomEqualsInternal]
+        [SuppressMessage("Code Quality", "IDE0051")]
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+        private bool CustomEquals(FileOpeningBuilder other)
+        {
+            return _create == other._create &&
+                   _truncate == other._truncate &&
+                   _append == other._append &&
+                   _write == other._write &&
+                   _read == other._read &&
+                   _createNew == other._createNew;
+        }
+
         private struct FileOpeningSettings
         {
             public FileOpeningSettings(FileMode fileMode, FileAccess fileAccess, FileShare fileShare)
@@ -133,19 +146,6 @@ namespace Messerli.FileOpeningBuilder
             public FileAccess FileAccess { get; }
 
             public FileShare FileShare { get; }
-        }
-
-        [CustomEqualsInternal]
-        [SuppressMessage("Code Quality", "IDE0051")]
-        [SuppressMessage("ReSharper", "UnusedMember.Local")]
-        private bool CustomEquals(FileOpeningBuilder other)
-        {
-            return _create == other._create &&
-                   _truncate == other._truncate &&
-                   _append == other._append &&
-                   _write == other._write &&
-                   _read == other._read &&
-                   _createNew == other._createNew;
         }
     }
 }
