@@ -2,6 +2,6 @@ framework auto-detect
 
 source https://www.nuget.org/api/v2
 
-nuget Equals.Fody ~> 1.9 copy_local: true
-nuget Messerli.Test.Utility ~> 0.1.0
-nuget Messerli.Utility ~> 0.1.1
+nuget Equals.Fody ~> 4.0 copy_local: true
+nuget Messerli.Test.Utility ~> 0.4.0
+nuget Messerli.Utility ~> 0.2.0
