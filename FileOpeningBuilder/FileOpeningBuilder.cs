@@ -1,6 +1,7 @@
 ﻿#pragma warning disable 660,661
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace Messerli.FileOpeningBuilder
@@ -8,48 +9,38 @@ namespace Messerli.FileOpeningBuilder
     [Equals]
     public class FileOpeningBuilder : IFileOpeningBuilder
     {
-        private bool _create;
-        private bool _truncate;
-        private bool _append;
-        private bool _write;
-        private bool _read;
-        private bool _createNew;
+        private readonly bool _create;
+        private readonly bool _truncate;
+        private readonly bool _append;
+        private readonly bool _write;
+        private readonly bool _read;
+        private readonly bool _createNew;
 
-        public IFileOpeningBuilder Create(bool create)
+        public FileOpeningBuilder()
+        {
+        }
+
+        private FileOpeningBuilder(bool create, bool truncate, bool append, bool write, bool read, bool createNew)
         {
             _create = create;
-            return this;
-        }
-
-        public IFileOpeningBuilder Truncate(bool truncate)
-        {
             _truncate = truncate;
-            return this;
-        }
-
-        public IFileOpeningBuilder Append(bool append)
-        {
             _append = append;
-            return this;
-        }
-
-        public IFileOpeningBuilder Write(bool write)
-        {
             _write = write;
-            return this;
-        }
-
-        public IFileOpeningBuilder Read(bool read)
-        {
             _read = read;
-            return this;
+            _createNew = createNew;
         }
 
-        public IFileOpeningBuilder CreateNew(bool createNew)
-        {
-            _createNew = createNew;
-            return this;
-        }
+        public IFileOpeningBuilder Create(bool create) => Clone(create: create);
+
+        public IFileOpeningBuilder Truncate(bool truncate) => Clone(truncate: truncate);
+
+        public IFileOpeningBuilder Append(bool append) => Clone(append: append);
+
+        public IFileOpeningBuilder Write(bool write) => Clone(write: write);
+
+        public IFileOpeningBuilder Read(bool read) => Clone(read: read);
+
+        public IFileOpeningBuilder CreateNew(bool createNew) => Clone(createNew: createNew);
 
         public Stream Open(string path)
         {
@@ -62,6 +53,23 @@ namespace Messerli.FileOpeningBuilder
         public static bool operator ==(FileOpeningBuilder left, FileOpeningBuilder right) => Operator.Weave(left, right);
 
         public static bool operator !=(FileOpeningBuilder left, FileOpeningBuilder right) => Operator.Weave(left, right);
+
+        private IFileOpeningBuilder Clone(
+            bool? create = null,
+            bool? truncate = null,
+            bool? append = null,
+            bool? write = null,
+            bool? read = null,
+            bool? createNew = null)
+        {
+            return new FileOpeningBuilder(
+                create ?? _create,
+                truncate ?? _truncate,
+                append ?? _append,
+                write ?? _write,
+                read ?? _read,
+                createNew ?? _createNew);
+        }
 
         private void HandleNotNativelySupportedConfigurations(FileInfo path)
         {
@@ -125,6 +133,19 @@ namespace Messerli.FileOpeningBuilder
             public FileAccess FileAccess { get; }
 
             public FileShare FileShare { get; }
+        }
+
+        [CustomEqualsInternal]
+        [SuppressMessage("Code Quality", "IDE0051")]
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+        private bool CustomEquals(FileOpeningBuilder other)
+        {
+            return _create == other._create &&
+                   _truncate == other._truncate &&
+                   _append == other._append &&
+                   _write == other._write &&
+                   _read == other._read &&
+                   _createNew == other._createNew;
         }
     }
 }

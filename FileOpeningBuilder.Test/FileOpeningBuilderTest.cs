@@ -384,6 +384,37 @@ namespace Messerli.FileOpeningBuilder.Test
             }
         }
 
+        [Theory]
+        [MemberData(nameof(Modifiers))]
+        public void CallingModifiersCreatesACopy(Func<IFileOpeningBuilder, IFileOpeningBuilder> applyModifier)
+        {
+            var builderOne = new FileOpeningBuilder();
+            var builderTwo = applyModifier(builderOne);
+            Assert.NotEqual(builderOne, builderTwo);
+        }
+
+        [Fact]
+        public void BuilderCanBeCompared()
+        {
+            var builderOne = new FileOpeningBuilder().Read(true);
+            var builderTwo = new FileOpeningBuilder().Read(true);
+            Assert.Equal(builderOne, builderTwo);
+        }
+
+        public static TheoryData<Func<IFileOpeningBuilder, IFileOpeningBuilder>> Modifiers()
+        {
+            return new TheoryData<Func<IFileOpeningBuilder, IFileOpeningBuilder>>
+            {
+                b => b.Create(true),
+                b => b.Truncate(true),
+                b => b.Append(true),
+                b => b.Write(true),
+                b => b.Read(true),
+                b => b.CreateNew(true),
+            };
+        }
+
+
         private static void AssertThatFileContainsWrittenContent(
             IFileOpeningBuilder fileOpeningBuilder,
             TestFileData testFileData,
