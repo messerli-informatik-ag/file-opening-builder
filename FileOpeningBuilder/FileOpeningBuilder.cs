@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable 660,661
+
+using System;
 using System.IO;
 
 namespace Messerli.FileOpeningBuilder
@@ -56,6 +58,10 @@ namespace Messerli.FileOpeningBuilder
             HandleNotNativelySupportedConfigurations(fileInfo);
             return fileInfo.Open(settings.FileMode, settings.FileAccess, settings.FileShare);
         }
+
+        public static bool operator ==(FileOpeningBuilder left, FileOpeningBuilder right) => Operator.Weave(left, right);
+
+        public static bool operator !=(FileOpeningBuilder left, FileOpeningBuilder right) => Operator.Weave(left, right);
 
         private void HandleNotNativelySupportedConfigurations(FileInfo path)
         {
