@@ -393,11 +393,12 @@ namespace Messerli.FileOpeningBuilder.Test
             Assert.NotEqual(builderOne, builderTwo);
         }
 
-        [Fact]
-        public void BuilderCanBeCompared()
+        [Theory]
+        [MemberData(nameof(Modifiers))]
+        public void BuilderIsEqualWhenTheSameFlagsAreSet(Func<IFileOpeningBuilder, IFileOpeningBuilder> applyModifier)
         {
-            var builderOne = new FileOpeningBuilder().Read(true);
-            var builderTwo = new FileOpeningBuilder().Read(true);
+            var builderOne = applyModifier(new FileOpeningBuilder());
+            var builderTwo = applyModifier(new FileOpeningBuilder());
             Assert.Equal(builderOne, builderTwo);
         }
 
