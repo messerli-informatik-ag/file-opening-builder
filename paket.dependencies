@@ -5,4 +5,3 @@ source https://www.nuget.org/api/v2
 nuget Fody ~> 6.0 copy_local: true
 nuget Equals.Fody ~> 4.0 copy_local: true
 nuget Messerli.Test.Utility ~> 0.4.0
-nuget Messerli.Utility ~> 0.2.0
