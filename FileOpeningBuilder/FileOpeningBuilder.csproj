@@ -5,7 +5,6 @@
     <RootNamespace>Messerli.FileOpeningBuilder</RootNamespace>
     <AssemblyName>Messerli.FileOpeningBuilder</AssemblyName>
     <Version>0.2.0</Version>
-    <Authors>Jan Nils Ferner, Dominic Groth, Ruben Schmidmeister, Flavio Suter</Authors>
     <Company>Messerli Informatik AG</Company>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/messerli-informatik-ag/file-opening-builder</RepositoryUrl>
